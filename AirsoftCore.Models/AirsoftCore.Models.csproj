@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\AirsoftCore\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
 </Project>

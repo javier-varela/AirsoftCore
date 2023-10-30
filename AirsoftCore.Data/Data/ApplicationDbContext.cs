@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using AirsoftCore.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AirsoftCore.Data
@@ -9,5 +10,7 @@ namespace AirsoftCore.Data
             : base(options)
         {
         }
+
+        public DbSet<Categoria> Categorias { get; set; } 
     }
 }
