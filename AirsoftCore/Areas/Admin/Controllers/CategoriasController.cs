@@ -2,10 +2,14 @@
 using AirsoftCore.Data.Data.Repository;
 using AirsoftCore.Data.Data.Repository.IRepository;
 using AirsoftCore.Models;
+using AirsoftCore.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace AirsoftCore.Areas.Admin.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     [Area("Admin")]
     public class CategoriasController : Controller
     {
