@@ -7,23 +7,47 @@
 
 <a asp-action="Create" class="btn btn-primary">Crear</a>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Orden)
-        </td>
+<div class="container">
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Name)</th>
+            <th>@Html.DisplayNameFor(m => m.Orden)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
 
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a onclick=Delete("@item.Id")>Delete</a>
-        </td>
-    </tr>
-}
+    @if (Model.Count() > 0)
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Orden)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <button onclick=Delete("@item.Id")>Delete</button>
+                </td>
+            </tr>
+        }
+
+    }
+    else
+    {
+        <tr>
+            No Hay Categorias
+        </tr>
+    }
+</table>
+
+</div>
+
 @section Scripts{
     @if (TempData["SuccesAdd"] != null)
     {
@@ -82,8 +106,6 @@
 
         }
     </script>
-    <script type="module">
-
-    </script>
+   
 }
 

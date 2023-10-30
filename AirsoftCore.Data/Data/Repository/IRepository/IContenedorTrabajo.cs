@@ -10,6 +10,8 @@ namespace AirsoftCore.Data.Data.Repository.IRepository
     {
         ICategoriaRepository Categoria { get; }
 
+        IUsuarioRepository Usuario { get; }
+
         void Save();
 
     }

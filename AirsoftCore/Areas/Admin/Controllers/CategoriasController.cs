@@ -1,4 +1,5 @@
 ﻿using AirsoftCore.Data;
+using AirsoftCore.Data.Data.Repository;
 using AirsoftCore.Data.Data.Repository.IRepository;
 using AirsoftCore.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,9 @@ namespace AirsoftCore.Areas.Admin.Controllers
     {
         private readonly IContenedorTrabajo _contenedorTrabajo;
 
-        public CategoriasController(IContenedorTrabajo contenedorTrabajo, ApplicationDbContext context)
+        public CategoriasController(IContenedorTrabajo contenedorTrabajo)
         {
             _contenedorTrabajo = contenedorTrabajo;
-            _context = context;
         }
 
         [HttpGet]

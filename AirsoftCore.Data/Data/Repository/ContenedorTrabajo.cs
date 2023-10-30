@@ -15,9 +15,12 @@ namespace AirsoftCore.Data.Data.Repository
         {
             _db = db;
             Categoria = new CategoriaRepository(_db);
+            Usuario = new UsuarioRepository(_db);
         }
 
         public ICategoriaRepository Categoria {  get; private set; }
+
+        public IUsuarioRepository Usuario { get; private set; }
 
         public void Dispose()
         {
