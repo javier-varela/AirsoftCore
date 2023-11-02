@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web.Mvc;
 
 namespace AirsoftCore.Data.Data.Repository.IRepository
 {
-    public interface ICategoriaRepository : IRepository<Categoria>
+    public interface IImagenProductoRepository : IRepository<ImagenProducto>
     {
-        IEnumerable<SelectListItem> GetListaCategorias();
 
-        void Update(Categoria categoria);
+        void Update(ImagenProducto imagenProducto);
 
     }
 }

@@ -1,0 +1,57 @@
+﻿@model AirsoftCore.Models.ViewModels.ProductoViewModel
+
+@{
+    ViewData["Tittle"] = "Crear Producto";
+}
+
+
+<h4>Crear Producto</h4>
+
+<form method="POST" asp-action="Create">
+    <div class="row px-2 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-10 offset-1 mt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="col-4">
+                        <label asp-for="Producto.Nombre"></label>
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Producto.Nombre" class="form-control" />
+                    <span asp-validation-for="Producto.Nombre" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="col-4">
+                        <label asp-for="Producto.Descripcion"></label>
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Producto.Descripcion" class="form-control" />
+                    <span asp-validation-for="Producto.Descripcion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="col-4">
+                        <label for="Categoria">Categorias</label>
+                    </label>
+                </div>
+                <div class="col-8">
+                   @Html.DropDownListFor(m => m.Producto.CategoriaId, Model.ListaCategorias, "-Selecciona una categoria-",
+                   new { @class = "@foorm-control"})
+                </div>
+            </div>
+
+            <div class="form-group row">
+
+                <div class="col-8">
+                    <partial name="_VistaCrearVolver" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -26,7 +26,7 @@ namespace AirsoftCore.Data.Data.Repository
             objFromDB.Descripcion = producto.Descripcion;
             objFromDB.Categoria = producto.Categoria;
             objFromDB.Imagenes = producto.Imagenes;
-
+            
             _db.SaveChanges();
         }
     }
