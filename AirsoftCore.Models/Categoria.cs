@@ -14,7 +14,7 @@ namespace AirsoftCore.Models
 
         [Required(ErrorMessage = "Ingrese un nombre para la categoría")]
         [Display(Name = "Nombre Categoría")]
-        public string Name { get; set; }
+        public string Nombre { get; set; }
 
         [Display(Name = "Orden de visualización")]
         public int? Orden { get; set; }

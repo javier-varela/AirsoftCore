@@ -23,7 +23,7 @@ namespace AirsoftCore.Data.Data.Repository
         {
             return _db.Categorias.Select(i => new SelectListItem()
             {
-                Text = i.Name,
+                Text = i.Nombre,
                 Value = i.Id.ToString()
             }
             );
@@ -32,7 +32,7 @@ namespace AirsoftCore.Data.Data.Repository
         public void Update(Categoria categoria)
         {
             var objFromDB = _db.Categorias.FirstOrDefault(s => s.Id == categoria.Id);
-            objFromDB.Name = categoria.Name;
+            objFromDB.Nombre = categoria.Nombre;
             objFromDB.Orden = categoria.Orden;
 
             _db.SaveChanges();
