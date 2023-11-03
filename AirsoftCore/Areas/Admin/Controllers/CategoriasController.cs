@@ -80,7 +80,7 @@ namespace AirsoftCore.Areas.Admin.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            Categoria objFromDb = await _contenedorTrabajo.Categoria.GetAsync(id);
+            var objFromDb = await _contenedorTrabajo.Categoria.GetAsync(id);
             if (objFromDb == null)
             {
                 return Json(new { succes = false, message = "Error borrando categoria" });

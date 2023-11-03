@@ -1,4 +1,5 @@
 ﻿using AirsoftCore.Data.Data.Repository.IRepository;
+using AirsoftCore.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace AirsoftCore.Data.Data.Repository
             }
             if(orderBy != null)
             {
-                return orderBy(query).ToList();
+                _ = orderBy(query);
             }
 
             return query.ToList();
@@ -75,14 +76,20 @@ namespace AirsoftCore.Data.Data.Repository
             return query.FirstOrDefault();
         }
 
-        public void Remove(int id)
+        public async void Remove(int id)
         {
-            T entityToRemove = dbSet.Find(id);
+            T entityToRemove = await dbSet.FindAsync(id);
+            if (entityToRemove != null)
+            {
+                dbSet.Remove(entityToRemove);
+            }
         }
 
         public void Remove(T entity)
         {
             dbSet.Remove(entity);
         }
+
+       
     }
 }

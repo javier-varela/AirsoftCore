@@ -1,4 +1,5 @@
-﻿using AirsoftCore.Models;
+﻿using AirsoftCore.Data.Data.Repository.IRepository;
+using AirsoftCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,16 +8,16 @@ namespace AirsoftCore.Areas.Client.Controllers
     [Area("Client")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IContenedorTrabajo _contenedorTrabajo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IContenedorTrabajo contenedorTrabajo)
         {
-            _logger = logger;
+           _contenedorTrabajo = contenedorTrabajo;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_contenedorTrabajo.Producto.GetAll(includeProperties: ",Imagenes,Categoria"));
         }
 
         public IActionResult Privacy()

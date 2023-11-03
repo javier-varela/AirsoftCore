@@ -20,8 +20,8 @@ namespace AirsoftCore.Data.Data.Repository.IRepository
             string includeProperties = null
         );
 
-        T GetFirstOrDefault(
 
+        T GetFirstOrDefault(
             Expression<Func<T, bool>> filter = null,
             string includeProperties = null
         );
@@ -30,6 +30,8 @@ namespace AirsoftCore.Data.Data.Repository.IRepository
 
         void Remove(int id);
         void Remove(T entity);
+
+
 
     }
 }

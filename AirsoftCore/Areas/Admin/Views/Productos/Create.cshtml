@@ -7,7 +7,7 @@
 
 <h4>Crear Producto</h4>
 
-<form method="POST" asp-action="Create">
+<form method="POST" asp-action="Create" enctype="multipart/form-data">
     <div class="row px-2 border">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="col-10 offset-1 mt-4">
@@ -45,6 +45,18 @@
                    new { @class = "@foorm-control"})
                 </div>
             </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="col-4">
+                        <label for="Imagenes">Imagenes</label>
+                    </label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="Imagenes" id="subidaArchivo" multiple class="form-control"/>
+                </div>
+            </div>
+
 
             <div class="form-group row">
 
