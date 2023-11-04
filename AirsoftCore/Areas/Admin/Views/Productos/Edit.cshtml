@@ -1,13 +1,14 @@
 ﻿@model AirsoftCore.Models.ViewModels.ProductoViewModel
 
 @{
-    ViewData["Tittle"] = "Crear Producto";
+    ViewData["Tittle"] = "Editar Producto";
 }
 
 <section class="container">
 
 
-    <form method="POST" class="shadow mx-auto" style="max-width:1024px" asp-action="Create" enctype="multipart/form-data">
+    <form method="POST" class="shadow mx-auto" style="max-width:1024px" asp-action="Edit" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Producto.Id" class="form-control" />
         <div class="bg-primary text-white container p-4"> <h4>Crear Producto</h4></div>
         <div class="container bg-white p-4 gap-3 flex-column d-flex">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -34,11 +35,11 @@
             </div>
 
             <div>
-                <label class="form-label" for="Categoria">Categorias</label>
+                <label class="form-label" for="Categorias">Categorias</label>
 
                 @Html.DropDownListFor(m => m.Producto.CategoriaId, Model.ListaCategorias, "-Selecciona una categoria-",
-                new { @class = "form-select" , @name = "Categoria"})
-
+                new { @class = "form-select" , @name = "Categorias"})
+                <span asp-validation-for="Producto.CategoriaId" class="text-danger"></span>
             </div>
 
             <div>
@@ -50,7 +51,7 @@
 
 
 
-            <partial name="_VistaCrearVolver" />
+            <partial name="_VistaGuardarVolver" />
 
         </div>
 
@@ -59,4 +60,10 @@
 
     </form>
 </section>
+
+@section Scripts{
+    <script>
+       
+    </script>
+}
 

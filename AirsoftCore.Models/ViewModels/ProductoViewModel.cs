@@ -14,12 +14,5 @@ namespace AirsoftCore.Models.ViewModels
         public Producto Producto { get; set; }
         public IEnumerable<SelectListItem> ListaCategorias { get; set; }
 
-        public Categoria Categoria { get; set; }
-
-        public IEnumerable<SelectListItem> ListaImagenes { get; set; }
-
-
-
-
     }
 }

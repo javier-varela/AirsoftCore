@@ -14,5 +14,9 @@ namespace AirsoftCore.Models
         [Display(Name ="Nombre de Usuario")]
         public string Nombre { get; set; }
 
+        public double Puntos { get; set; }
+
+        public List<ProductoCarrito> ProductosCarrito { get; set; }
+
     }
 }

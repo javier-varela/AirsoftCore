@@ -19,13 +19,14 @@ namespace AirsoftCore.Data.Data.Repository
             _db = db;
         }
 
-        public void Update(Producto producto)
+        public  void Update(Producto producto)
         {
             var objFromDB = _db.Productos.FirstOrDefault(s => s.Id == producto.Id);
             objFromDB.Nombre = producto.Nombre;
             objFromDB.Descripcion = producto.Descripcion;
             objFromDB.Categoria = producto.Categoria;
-            objFromDB.Imagenes = producto.Imagenes;
+            objFromDB.CategoriaId = producto.CategoriaId;
+            objFromDB.Stock = producto.Stock;
             
             _db.SaveChanges();
         }

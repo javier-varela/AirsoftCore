@@ -22,7 +22,7 @@ namespace AirsoftCore.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_contenedorTrabajo.Producto.GetAll());
+            return View(_contenedorTrabajo.Producto.GetAll(includeProperties:"Categoria"));
         }
 
         
@@ -85,6 +85,40 @@ namespace AirsoftCore.Areas.Admin.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ProductoViewModel model = new()
+            {
+                Producto = new AirsoftCore.Models.Producto(),
+                ListaCategorias = _contenedorTrabajo.Categoria.GetListaCategorias()
+            };
+
+            
+            model.Producto = _contenedorTrabajo.Producto.Get(id);
+            if (model.Producto == null)
+            {
+                return NotFound();
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ProductoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _contenedorTrabajo.Producto.Update(model.Producto);
+                _contenedorTrabajo.Save();
+                return RedirectToAction(nameof(Index));
+            }
+
+            model.ListaCategorias = _contenedorTrabajo.Categoria.GetListaCategorias();
+            return View(model.Producto.Id);
+        }
+
         #region llamadas a la API
 
         [HttpDelete]
@@ -98,9 +132,16 @@ namespace AirsoftCore.Areas.Admin.Controllers
             }
 
             if(objFromDb.Imagenes != null) {
+                var rutaDirectorioPrincipal = _webHostEnvironment.WebRootPath;
                 foreach (var imagen in objFromDb.Imagenes)
                 {
                     _contenedorTrabajo.ImagenProducto.Remove(imagen);
+                    var rutaImagen = Path.Combine(rutaDirectorioPrincipal, imagen.Url.TrimStart('\\'));
+                    if(System.IO.File.Exists(rutaImagen))
+                    {
+                        System.IO.File.Delete(rutaImagen);
+                    }
+                    
                 }
             }
 

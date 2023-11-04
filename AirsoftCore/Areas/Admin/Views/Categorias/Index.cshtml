@@ -3,13 +3,13 @@
 
 
 
-<div class="container d-flex flex-column gap-4 align-items-start">
+<div class="container d-flex flex-column gap-4 align-items-start" style="max-width:1024px">
     <h1>
         Categorias
     </h1>
 
     <a asp-action="Create" class="btn btn-primary">Crear <i class="bi bi-plus-lg"></i></a>
-    <table class="table border shadow">
+    <table class="table table-striped border shadow">
         <thead>
             <tr class="bg-primary text-white">
                 <th scope="col">@Html.DisplayNameFor(m => m.Id)</th>
@@ -26,7 +26,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
-                    <td>
+                    <td class=" ">
                         @Html.DisplayFor(modelItem => item.Nombre)
                     </td>
 

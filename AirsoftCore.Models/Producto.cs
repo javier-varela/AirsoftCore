@@ -21,11 +21,16 @@ namespace AirsoftCore.Models
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
 
+        [Range(0, int.MaxValue)]
+        public int Stock { get; set; }
         public int CategoriaId { get; set; }
 
         [ForeignKey("CategoriaId")]
         public Categoria Categoria { get; set; }
 
         public List<ImagenProducto> Imagenes { get; set; }
+
+        [Range(0,double.MaxValue)]
+        public double Precio { get; set; }
     }
 }
