@@ -31,7 +31,7 @@ namespace AirsoftCore.Data.Data.Inicializador
         {
             try
             {
-                if (_db.Database.GetPendingMigrations().Count() > 0)
+                if (_db.Database.GetPendingMigrations().Any())
                 {
                     _db.Database.Migrate();
                 }
@@ -59,12 +59,25 @@ namespace AirsoftCore.Data.Data.Inicializador
 
             }, "Admin123#").GetAwaiter().GetResult();
 
-            Usuario usuario = _db.Usuarios
+            Usuario admin = _db.Usuarios
                 .Where(us => us.Email == "admin@admin.com")
                 .FirstOrDefault();
-            _userManager.AddToRoleAsync(usuario, Roles.Admin).GetAwaiter().GetResult();
+            _userManager.AddToRoleAsync(admin, Roles.Admin).GetAwaiter().GetResult();
+            _userManager.AddToRoleAsync(admin, Roles.Usuario).GetAwaiter().GetResult();
 
+            _userManager.CreateAsync(new Usuario
+            {
+                UserName = "user@user.com",
+                Email = "user@user.com",
+                EmailConfirmed = true,
+                Nombre = "user",
 
+            }, "User123#").GetAwaiter().GetResult();
+
+            Usuario usuario = _db.Usuarios
+                .Where(us => us.Email == "user@user.com")
+                .FirstOrDefault();
+            _userManager.AddToRoleAsync(usuario, Roles.Usuario).GetAwaiter().GetResult();
 
         }
     }

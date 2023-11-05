@@ -1,21 +1,21 @@
 ﻿@model ProductoCarrito
 
 @{
-    ViewData["Tittle"] = "Crear Categoria";
+    ViewData["Tittle"] = "Editar Producto Carrito";
 }
 
 
-<form class="shadow mx-auto mt-5" style="max-width: 1024px" method="POST" asp-action="Add">
+<form class="shadow mx-auto mt-5" style="max-width: 1024px" method="POST" asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="ProductoId" />
-    <input type="hidden" asp-for="UsuarioId" />
-    <div class="bg-primary text-white container p-4"> <h4>Crear Categoria</h4></div>
+    <div class="bg-primary text-white container p-4"> <h4>Editar Producto Del Carrito</h4></div>
     <div class="container bg-white p-4 gap-3 flex-column d-flex">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
         <div>
 
-            <span  class="" >@Model.Producto.Nombre</span>
+            <span class="">@Model.Producto.Nombre</span>
 
         </div>
 

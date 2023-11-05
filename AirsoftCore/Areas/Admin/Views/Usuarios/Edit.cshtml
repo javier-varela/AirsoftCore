@@ -8,6 +8,7 @@
 <h4>Editar Categoria</h4>
 
 <form method="POST" asp-action="Edit">
+    <input type="hidden" asp-for="Id"/>
     <div class="row px-2 border">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="col-10 offset-1 mt-4">

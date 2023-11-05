@@ -60,8 +60,8 @@ namespace AirsoftCore.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(Usuario usuario)
         {
-            string id = _userManager.GetUserId(User);
-            _contenedorTrabajo.Usuario.UpdatePuntos(usuario.Puntos,id);
+      
+            _contenedorTrabajo.Usuario.UpdatePuntos(usuario.Puntos,usuario.Id);
             return View(usuario);
         }
 

@@ -1,11 +1,13 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<Usuario> SignInManager
 @inject UserManager<Usuario> UserManager
+
+
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-
 
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
@@ -28,11 +30,18 @@
                         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Points" asp-action="Edit">Valor Puntos</a>
                     </li>
 
+                    <li class="dropdown-item">
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                    </li>
+
+
                 </ul>
             </li>
         }
-        
-        
+
+
+
+
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class=" btn btn-danger ">Logout</button>
@@ -49,4 +58,7 @@
         </li>
     }
 </ul>
+
+
+
 
