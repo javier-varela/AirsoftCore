@@ -14,6 +14,10 @@ namespace AirsoftCore.Data.Data.Repository.IRepository
 
         IProductoRepository Producto { get; }
 
+        ICompraRepository Compra { get; }
+
+        ICompraProductoRepository CompraProducto { get; }
+
         IProductoCarritoRepository ProductoCarrito { get; }
 
         IImagenProductoRepository ImagenProducto { get; }

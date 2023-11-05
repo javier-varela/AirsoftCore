@@ -14,7 +14,7 @@ namespace AirsoftCore.Areas.Admin.Controllers
         public UsuariosController(IContenedorTrabajo contenedorTrabajo, UserManager<Usuario> userManager)
         {
             _contenedorTrabajo = contenedorTrabajo;
-              _userManager = userManager;
+             _userManager = userManager;
     }
 
         [HttpGet]

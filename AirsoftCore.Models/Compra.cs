@@ -12,6 +12,8 @@ namespace AirsoftCore.Models
         [Key]
         public int Id { get; set; }
 
+        public string UsuarioId { get; set; }
+
         public List<CompraProducto> Productos { get; set; }
 
         [DataType(DataType.Date)]  

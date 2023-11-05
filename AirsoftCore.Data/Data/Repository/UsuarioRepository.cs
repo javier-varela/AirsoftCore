@@ -35,6 +35,13 @@ namespace AirsoftCore.Data.Data.Repository
             _db.SaveChanges();
         }
 
+        public void UpdateCompras(List<Compra> compras, string id)
+        {
+            var usuarioFromDb = _db.Usuarios.FirstOrDefault(u => u.Id == id);
+            usuarioFromDb.Compras = compras;
+            _db.SaveChanges();
+        }
+
         public void UpdatePuntos(double points, string id)
         {
             var usuarioFromDb = _db.Usuarios.FirstOrDefault(u => u.Id == id);

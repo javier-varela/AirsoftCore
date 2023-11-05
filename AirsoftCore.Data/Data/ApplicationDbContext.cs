@@ -15,6 +15,8 @@ namespace AirsoftCore.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Producto> Productos { get; set; }
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<CompraProducto> DetallesCompra { get; set; }
         public DbSet<ProductoCarrito> ProductosCarrito { get; set; }
         public DbSet<ImagenProducto> ImagenesProducto { get; set; }
 

@@ -3,11 +3,13 @@ using AirsoftCore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
-
+using Microsoft.AspNetCore.Authorization;
+using AirsoftCore.Utilities;
 
 namespace AirsoftCore.Areas.Client.Controllers
 {
     [Area("Client")]
+    [Authorize(Roles = Roles.Admin + "," + Roles.Usuario)]
     public class CarritoController : Controller
     {
         private readonly IContenedorTrabajo _contenedorTrabajo;
@@ -17,11 +19,14 @@ namespace AirsoftCore.Areas.Client.Controllers
         {
             _contenedorTrabajo = contenedorTrabajo;
             _userManager = userManager;
+
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+
+
             string userId = _userManager.GetUserId(User);
             return View(_contenedorTrabajo.ProductoCarrito.GetAll((p) => p.UsuarioId == userId, includeProperties: "Producto"));
         }
@@ -62,28 +67,58 @@ namespace AirsoftCore.Areas.Client.Controllers
         public async Task<IActionResult> Pagar()
         {
             string userId = _userManager.GetUserId(User);
-            var productos = (List<ProductoCarrito>)_contenedorTrabajo.ProductoCarrito.GetAll((p) => p.UsuarioId == userId, includeProperties: "Producto");
+            var user = await _userManager.GetUserAsync(User);
+
+            var productosCarrito = (List<ProductoCarrito>)_contenedorTrabajo.ProductoCarrito.GetAll((p) => p.UsuarioId == userId, includeProperties: "Producto");
             double total = 0;
-            if (productos.Count == 0)
+
+            if (productosCarrito.Count == 0)
             {
                 return Json(new { succes = false, message = "No tienes Productos en el Carrito" });
 
             }
 
-            
-            foreach (var product in productos)
+
+            productosCarrito.ForEach(product =>
             {
                 double precio = product.Producto.Precio;
-                total += precio*product.Cantidad;
+                total += precio * product.Cantidad;
 
+            });
+
+            if (total > user.Puntos)
+            {
+                return Json(new { succes = false, message = "No tienes suficientes puntos en tu cuenta" });
             }
-           
-            return Json(new { succes = false, message = "Pagado: " + total });
+            List<CompraProducto> productosComprados = new List<CompraProducto>();
+            foreach(var productCarrito in productosCarrito)
+            {
+                productosComprados.Add(new CompraProducto()
+                {
+                    Producto = productCarrito.Producto,
+                    Cantidad = productCarrito.Cantidad,
+                    
+                });
+                _contenedorTrabajo.ProductoCarrito.Remove(productCarrito);
+            }
+
+            _contenedorTrabajo.Compra.Add(new Compra()
+            {
+                UsuarioId = userId,
+                FechaCompra = DateTime.Now,
+                Productos = productosComprados
+            });
+
+
             _contenedorTrabajo.Save();
+
+
+            return Json(new { succes = true, message = "Pagado: " + total + user.Puntos });
+            
         }
         #endregion
 
-      
+
 
 
 
