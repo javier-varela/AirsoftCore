@@ -27,6 +27,7 @@ namespace AirsoftCore.Data.Data.Repository
             objFromDB.Categoria = producto.Categoria;
             objFromDB.CategoriaId = producto.CategoriaId;
             objFromDB.Stock = producto.Stock;
+            objFromDB.Precio = producto.Precio;
             
             _db.SaveChanges();
         }

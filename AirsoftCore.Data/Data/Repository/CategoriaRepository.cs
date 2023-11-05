@@ -31,7 +31,7 @@ namespace AirsoftCore.Data.Data.Repository
 
         public void Update(Categoria categoria)
         {
-            var objFromDB = _db.Categorias.FirstOrDefault(s => s.Id == categoria.Id);
+            var objFromDB = _db.Categorias.FirstOrDefault(categ => categ.Id == categoria.Id);
             objFromDB.Nombre = categoria.Nombre;
             objFromDB.Orden = categoria.Orden;
 

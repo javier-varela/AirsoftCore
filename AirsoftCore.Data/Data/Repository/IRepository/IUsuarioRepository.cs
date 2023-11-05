@@ -14,5 +14,6 @@ namespace AirsoftCore.Data.Data.Repository.IRepository
 
         void DesbloquearUsuario(string id);
 
+        void UpdatePuntos(double points, string id);
     }
 }

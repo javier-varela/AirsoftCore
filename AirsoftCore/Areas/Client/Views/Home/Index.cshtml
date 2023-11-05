@@ -3,18 +3,21 @@
     ViewData["Title"] = "Home Page";
 }
 <section class="container">
-    <ul>
+    <ul class=" list-unstyled d-flex gap-3 ">
 
 
         @foreach (var item in Model)
         {
             <li>
                 <div class="card" style="width: 18rem;">
-                    <img src="@item.Imagenes[0]?.Url" class="card-img-top" alt="...">
+                    <img height="220" src="@item.Imagenes[0]?.Url" class="block object-fit-cover  card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <div class="card-tittle">
+                            <h5 class="">@item.Nombre</h5>
+                            <span class="badge bg-secondary">@item.Categoria.Nombre</span>
+                        </div>
+                        
+                        <a asp-area="Client" asp-controller="Carrito" asp-action="Add" asp-route-id="@item.Id" class="btn btn-primary mt-3">Añadir al  carrito</a>
                     </div>
                 </div>
             </li>

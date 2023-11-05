@@ -36,7 +36,7 @@ namespace AirsoftCore.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Categoria categoria)
         {
-            if (ModelState.IsValid)
+            if (categoria.Id == 0)
             {
                 _contenedorTrabajo.Categoria.Add(categoria);
                 _contenedorTrabajo.Save();

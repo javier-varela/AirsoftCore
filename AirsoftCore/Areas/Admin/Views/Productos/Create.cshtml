@@ -34,6 +34,14 @@
             </div>
 
             <div>
+
+                <label class="form-label" asp-for="Producto.Precio"></label>
+                <input type="number" asp-for="Producto.Precio" class="form-control" />
+                <span asp-validation-for="Producto.Precio" class="text-danger"></span>
+
+            </div>
+
+            <div>
                 <label class="form-label" for="Categoria">Categorias</label>
 
                 @Html.DropDownListFor(m => m.Producto.CategoriaId, Model.ListaCategorias, "-Selecciona una categoria-",

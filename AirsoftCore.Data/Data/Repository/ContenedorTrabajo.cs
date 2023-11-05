@@ -18,6 +18,8 @@ namespace AirsoftCore.Data.Data.Repository
             Usuario = new UsuarioRepository(_db);
             Producto = new ProductoRepository(_db);
             ImagenProducto = new ImagenProductoRepository(_db);
+            ProductoCarrito = new ProductoCarritoRepository(_db);
+            Monopoly = new MonopolyRepository(_db);
         }
 
         public ICategoriaRepository Categoria {  get; private set; }
@@ -26,6 +28,9 @@ namespace AirsoftCore.Data.Data.Repository
         public IUsuarioRepository Usuario { get; private set; }
 
         public IImagenProductoRepository ImagenProducto { get; private set; }
+
+        public IProductoCarritoRepository ProductoCarrito {  get; private set; }
+        public IMonopolyRepository Monopoly { get; private set; }
 
         public void Dispose()
         {

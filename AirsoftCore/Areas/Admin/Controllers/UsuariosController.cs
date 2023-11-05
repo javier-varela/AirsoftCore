@@ -1,5 +1,6 @@
 ﻿using AirsoftCore.Data.Data.Repository.IRepository;
 using AirsoftCore.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirsoftCore.Areas.Admin.Controllers
@@ -8,11 +9,13 @@ namespace AirsoftCore.Areas.Admin.Controllers
     public class UsuariosController : Controller
     {
         private readonly IContenedorTrabajo _contenedorTrabajo;
+        private readonly UserManager<Usuario> _userManager;
 
-        public UsuariosController(IContenedorTrabajo contenedorTrabajo)
+        public UsuariosController(IContenedorTrabajo contenedorTrabajo, UserManager<Usuario> userManager)
         {
             _contenedorTrabajo = contenedorTrabajo;
-        }
+              _userManager = userManager;
+    }
 
         [HttpGet]
         public IActionResult Index()
@@ -48,6 +51,20 @@ namespace AirsoftCore.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-       
+        [HttpGet]
+        public IActionResult Edit(string id)
+        {
+            return View(_contenedorTrabajo.Usuario.GetFirstOrDefault((user)=> user.Id == id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Usuario usuario)
+        {
+            string id = _userManager.GetUserId(User);
+            _contenedorTrabajo.Usuario.UpdatePuntos(usuario.Puntos,id);
+            return View(usuario);
+        }
+
+
     }
 }

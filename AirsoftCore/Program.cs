@@ -4,6 +4,7 @@ using AirsoftCore.Data.Data.Repository;
 using AirsoftCore.Data.Data.Repository.IRepository;
 using AirsoftCore.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,6 @@ builder.Services.AddIdentity<Usuario, IdentityRole>(options => options.SignIn.Re
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultUI();
 builder.Services.AddControllersWithViews();
-
 
 
 //Agregar contenedor de trabajo
@@ -75,4 +75,8 @@ void SiembraDeDatos()
        var inicializadorDb = scope.ServiceProvider.GetRequiredService<IInicializadorDB>();
         inicializadorDb.Inicializar();
     }
+
+
+
+    
 }

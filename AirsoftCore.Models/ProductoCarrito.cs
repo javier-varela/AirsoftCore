@@ -13,12 +13,25 @@ namespace AirsoftCore.Models
         [Key]
         public int Id { get; set; }
 
+        public string UsuarioId { get; set; }
+
         public int ProductoId { get; set; }
 
         [ForeignKey("ProductoId")]
         public Producto Producto { get; set; }
 
         public int Cantidad { get; set; }
+
+        public ProductoCarrito(string usuarioId, int productoId, int cantidad)
+        {
+            UsuarioId = usuarioId;
+            ProductoId = productoId;
+            Cantidad = cantidad;
+        }
+        public ProductoCarrito()
+        {
+            
+        }
 
     }
 }

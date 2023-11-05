@@ -9,6 +9,7 @@ namespace AirsoftCore.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            
         }
 
         public DbSet<Categoria> Categorias { get; set; }
@@ -16,5 +17,9 @@ namespace AirsoftCore.Data
         public DbSet<Producto> Productos { get; set; }
         public DbSet<ProductoCarrito> ProductosCarrito { get; set; }
         public DbSet<ImagenProducto> ImagenesProducto { get; set; }
+
+        public DbSet<Monopoly> Monopoly { get; set; }
+
     }
+
 }

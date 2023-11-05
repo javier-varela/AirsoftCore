@@ -1,0 +1,35 @@
+﻿@model ProductoCarrito
+
+@{
+    ViewData["Tittle"] = "Crear Categoria";
+}
+
+
+<form class="shadow mx-auto mt-5" style="max-width: 1024px" method="POST" asp-action="Add">
+    <input type="hidden" asp-for="ProductoId" />
+    <input type="hidden" asp-for="UsuarioId" />
+    <div class="bg-primary text-white container p-4"> <h4>Crear Categoria</h4></div>
+    <div class="container bg-white p-4 gap-3 flex-column d-flex">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <div>
+
+            <span  class="" >@Model.Producto.Nombre</span>
+
+        </div>
+
+        <div>
+
+            <label asp-for="Cantidad"></label>
+            <input asp-for="Cantidad" class="form-control" />
+            <span asp-validation-for="Cantidad" class="text-danger"></span>
+
+        </div>
+
+
+        <partial name="_VistaCrearVolver" />
+
+
+    </div>
+</form>

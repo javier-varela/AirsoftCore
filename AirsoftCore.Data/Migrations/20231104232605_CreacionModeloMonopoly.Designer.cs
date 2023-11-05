@@ -4,6 +4,7 @@ using AirsoftCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirsoftCore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231104232605_CreacionModeloMonopoly")]
+    partial class CreacionModeloMonopoly
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,32 +42,6 @@ namespace AirsoftCore.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categorias");
-                });
-
-            modelBuilder.Entity("AirsoftCore.Models.CompraProducto", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductoId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("CompraProducto");
                 });
 
             modelBuilder.Entity("AirsoftCore.Models.ImagenProducto", b =>
@@ -97,8 +73,8 @@ namespace AirsoftCore.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double>("DolarToPoints")
-                        .HasColumnType("float");
+                    b.Property<int>("DolarToPoints")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -381,19 +357,6 @@ namespace AirsoftCore.Data.Migrations
                     b.HasDiscriminator().HasValue("Usuario");
                 });
 
-            modelBuilder.Entity("AirsoftCore.Models.CompraProducto", b =>
-                {
-                    b.HasOne("AirsoftCore.Models.Producto", "Producto")
-                        .WithMany()
-                        .HasForeignKey("ProductoId");
-
-                    b.HasOne("AirsoftCore.Models.Usuario", null)
-                        .WithMany("Compras")
-                        .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Producto");
-                });
-
             modelBuilder.Entity("AirsoftCore.Models.ImagenProducto", b =>
                 {
                     b.HasOne("AirsoftCore.Models.Producto", null)
@@ -487,8 +450,6 @@ namespace AirsoftCore.Data.Migrations
 
             modelBuilder.Entity("AirsoftCore.Models.Usuario", b =>
                 {
-                    b.Navigation("Compras");
-
                     b.Navigation("ProductosCarrito");
                 });
 #pragma warning restore 612, 618

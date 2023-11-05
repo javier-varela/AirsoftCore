@@ -30,11 +30,13 @@
                     <td>
                         @if(item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
                         {
-                            <button onclick=Delete("@item.Id")>Block</button>
+                            <button onclick=Block("@item.Id")>Block</button>
                         }else{
                             <a asp-action="Desbloquear" asp-route-id="@item.Id">Desbloquear</a>
  
                         }
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        
                     </td>
                 </tr>
             }
@@ -52,7 +54,7 @@
 
 @section Scripts{
     <script>
-        function Delete(id) {
+        function Block(id) {
             Swal.fire({
                 title: '¿Estas Seguro?',
                 text: "Vas a bloquear un usuario!",

@@ -18,5 +18,7 @@ namespace AirsoftCore.Models
 
         public List<ProductoCarrito> ProductosCarrito { get; set; }
 
+        public List<CompraProducto> Compras { get; set;}
+
     }
 }

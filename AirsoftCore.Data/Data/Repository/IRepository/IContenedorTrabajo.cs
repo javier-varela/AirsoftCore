@@ -14,7 +14,11 @@ namespace AirsoftCore.Data.Data.Repository.IRepository
 
         IProductoRepository Producto { get; }
 
+        IProductoCarritoRepository ProductoCarrito { get; }
+
         IImagenProductoRepository ImagenProducto { get; }
+
+        IMonopolyRepository Monopoly { get; }
 
         void Save();
 
