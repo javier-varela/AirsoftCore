@@ -1,11 +1,14 @@
 ﻿using AirsoftCore.Data.Data.Repository.IRepository;
 using AirsoftCore.Models;
+using AirsoftCore.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirsoftCore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = Roles.Admin)]
     public class UsuariosController : Controller
     {
         private readonly IContenedorTrabajo _contenedorTrabajo;

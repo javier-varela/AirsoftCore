@@ -1,0 +1,45 @@
+﻿@model AirsoftCore.Models.ViewModels.DetailsCompraProductoViewModel
+
+
+
+
+<div class="container d-flex flex-column gap-4 align-items-start" style="max-width:1024px">
+    <h1>
+        @Model.Compra.FechaCompra
+    </h1>
+
+   
+    <table class="table table-striped border shadow">
+        <thead>
+            <tr class="bg-primary text-white">
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Valor Unitario</th>
+            </tr>
+        </thead>
+
+
+        @foreach (var item in Model.ProductosCompra)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.Nombre)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producto.Precio)
+                </td>
+
+
+            </tr>
+        }
+
+
+
+    </table>
+
+</div>

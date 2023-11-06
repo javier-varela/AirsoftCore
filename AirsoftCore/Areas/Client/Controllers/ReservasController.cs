@@ -1,12 +1,15 @@
 ﻿using AirsoftCore.Data.Data.Repository.IRepository;
 using AirsoftCore.Models;
 using AirsoftCore.Models.ViewModels;
+using AirsoftCore.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirsoftCore.Areas.Client.Controllers
 {
     [Area("Client")]
+    [Authorize(Roles = Roles.Usuario)]
     public class ReservasController : Controller
     {
         private readonly IContenedorTrabajo _contenedorTrabajo;
@@ -39,9 +42,20 @@ namespace AirsoftCore.Areas.Client.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(Reserva reserva)
+        public IActionResult Create(CreateReservaViewModel model)
         {
-            return View(reserva);
+            if (ModelState.IsValid)
+            {
+                model.Reserva.UsuarioId = _userManager.GetUserId(User);
+                model.Reserva.CanchaId = model.Cancha.Id;
+                model.Reserva.Precio = model.Reserva.DuracionHoras * model.Cancha.PrecioHora;
+                _contenedorTrabajo.Reserva.Add(model.Reserva);
+                _contenedorTrabajo.Save();
+                return View(nameof(Index));
+            }
+            
+            
+            return View(model);
         }
     }
 }

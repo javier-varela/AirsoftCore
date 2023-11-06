@@ -49,7 +49,7 @@ namespace AirsoftCore.Areas.Client.Controllers
             {
                 ProductosCarritoVM = _ProductosCarritoVM as IEnumerable<ProductoCarritoViewModel>,
                 Total = total,
-                PuntosUsuario = _contenedorTrabajo.Usuario.GetFirstOrDefault(u=>u.Id==userId).Puntos
+                PuntosUsuario = _contenedorTrabajo.Usuario.GetFirstOrDefault(u => u.Id == userId).Puntos
             };
 
             return View(model);
@@ -62,11 +62,11 @@ namespace AirsoftCore.Areas.Client.Controllers
 
             var _producto = _contenedorTrabajo.ProductoCarrito.GetFirstOrDefault(p => p.ProductoId == id);
 
-            
+
             if (_producto != null)
             {
                 int _id = _producto.Id;
-                return Redirect("/Client/Carrito/Edit/"+_id);
+                return Redirect("/Client/Carrito/Edit/" + _id);
             }
             ProductoCarrito pCarrito = new()
             {
@@ -160,7 +160,7 @@ namespace AirsoftCore.Areas.Client.Controllers
                 if (productCarrito.Producto.Stock < productCarrito.Cantidad)
                 {
                     _contenedorTrabajo.ProductoCarrito.Remove(productCarrito);
-                    return Json(new { succes = false, message = "No existen suficientes productos en Stock de "+productCarrito.Producto.Nombre });
+                    return Json(new { succes = false, message = "No existen suficientes productos en Stock de " + productCarrito.Producto.Nombre });
                 }
                 productosComprados.Add(new CompraProducto()
                 {
@@ -182,12 +182,12 @@ namespace AirsoftCore.Areas.Client.Controllers
             });
 
 
-            _contenedorTrabajo.Usuario.UpdatePuntos(user.Puntos - total,userId);
+            _contenedorTrabajo.Usuario.UpdatePuntos(user.Puntos - total, userId);
 
             _contenedorTrabajo.Save();
 
 
-            return Json(new { succes = true, message = "Pagado: " + total + user.Puntos });
+            return Json(new { succes = true, message = "Pagado: " + total + "Te quedan: " + user.Puntos });
 
         }
 

@@ -3,9 +3,12 @@ using AirsoftCore.Models.ViewModels;
 using AirsoftCore.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using AirsoftCore.Utilities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AirsoftCore.Areas.Admin.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     [Area("Admin")]
     public class CanchasController : Controller
     {

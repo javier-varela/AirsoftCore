@@ -1,9 +1,12 @@
 ﻿using AirsoftCore.Data.Data.Repository.IRepository;
 using AirsoftCore.Models;
+using AirsoftCore.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AirsoftCore.Areas.Admin.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     [Area("Admin")]
     public class PointsController : Controller
     {

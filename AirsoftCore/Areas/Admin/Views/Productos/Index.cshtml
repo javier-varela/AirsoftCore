@@ -80,12 +80,12 @@
         function Delete(id) {
             Swal.fire({
                 title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                text: "!BORRAR PRODUCTO!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: '!Si, Borrar!'
             }).then(async (result) => {
 
                 if (result.isConfirmed) {
@@ -100,7 +100,7 @@
                                 title: '!Eliminado!',
                                 text: response.message,
                                 confirmButtonText:
-                                    `<a href="/Admin/Productos"><i class="fa fa-thumbs-up"></i> Great!</a>`,
+                                    `<a href="/Admin/Productos"><i class="fa fa-thumbs-up"></i> Ok</a>`,
 
                             }
                             )

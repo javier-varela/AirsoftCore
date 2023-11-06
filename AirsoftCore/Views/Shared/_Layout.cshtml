@@ -31,12 +31,17 @@
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Client" asp-controller="Compras" asp-action="Index">Mis Compras</a>
+                            </li>
                             <a asp-area="Client" asp-action="" asp-controller="Carrito" type="button" style="margin-right:7px" class="btn btn-primary nav-item">
                                 <i class="bi bi-cart"></i> Carrito
                             </a>
                             <a asp-area="Client" asp-action="" asp-controller="Reservas" type="button" class="btn btn-secondary nav-item">
                                 <i class="bi bi-journals"></i> Reservas
                             </a>
+
+
                         }
 
                     </ul>
