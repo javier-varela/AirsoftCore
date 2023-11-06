@@ -20,5 +20,7 @@ namespace AirsoftCore.Models
 
         public List<Compra> Compras { get; set;}
 
+        public List<Reserva> Reservas { get; set; }
+
     }
 }

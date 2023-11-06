@@ -26,10 +26,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Canchas">Canchas</a>
+                        </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-area="Client" asp-action="" asp-controller="Carrito" type="button" class="btn btn-primary nav-item">
-                                Carrito <i class="bi bi-cart"></i>
+                            <a asp-area="Client" asp-action="" asp-controller="Carrito" type="button" style="margin-right:7px" class="btn btn-primary nav-item">
+                                <i class="bi bi-cart"></i> Carrito
+                            </a>
+                            <a asp-area="Client" asp-action="" asp-controller="Reservas" type="button" class="btn btn-secondary nav-item">
+                                <i class="bi bi-journals"></i> Reservas
                             </a>
                         }
 

@@ -1,0 +1,43 @@
+﻿@model AirsoftCore.Models.ViewModels.CreateReservaViewModel
+
+@{
+    ViewData["Tittle"] = "Crear Reserva";
+}
+
+<section class="container">
+
+
+    <form method="POST" class="shadow mx-auto" style="max-width:1024px" asp-action="Create" enctype="multipart/form-data">
+
+
+        <div class="bg-primary text-white container p-4"> <h4>Reservar Cancha: @Model.Cancha.Nombre</h4></div>
+        <div class="container bg-white p-4 gap-3 flex-column d-flex">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                <label class="form-label" asp-for="Reserva.FechaHora"></label>
+                <input asp-asp-for="Reserva.FechaHora" type="datetime-local" class="form-control" />
+                <span asp-validation-for="Reserva.FechaHora" class="text-danger"></span>
+            </div>
+            <div>
+
+                <label class="form-label" asp-for="Reserva.DuracionHoras"></label>
+                <input type="number" asp-for="Reserva.DuracionHoras" class="form-control" />
+                <span asp-validation-for="Reserva.DuracionHoras" class="text-danger"></span>
+
+            </div>
+
+
+            <div id="imagenesContainer"></div>
+
+
+
+            <partial name="_VistaCrearVolver" />
+
+        </div>
+
+
+
+
+    </form>
+</section>
+

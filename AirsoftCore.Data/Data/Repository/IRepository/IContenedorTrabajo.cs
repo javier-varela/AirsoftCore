@@ -24,6 +24,14 @@ namespace AirsoftCore.Data.Data.Repository.IRepository
 
         IMonopolyRepository Monopoly { get; }
 
+        IReservaRepository Reserva { get; }
+
+        ICanchaRepository Cancha { get; }
+
+        IImagenCanchaRepository ImagenCancha { get; }
+
+        IFechaCierreRepository FechaCierre { get; }
+
         void Save();
 
     }

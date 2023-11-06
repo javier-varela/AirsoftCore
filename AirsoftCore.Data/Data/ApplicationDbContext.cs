@@ -22,6 +22,11 @@ namespace AirsoftCore.Data
 
         public DbSet<Monopoly> Monopoly { get; set; }
 
+        public DbSet<ImagenCancha> ImagenesCanchas { get; set; }
+        public DbSet<FechaCierre> FechasCierre { get; set; }
+        public DbSet<Reserva> Reservas { get; set; }
+        public DbSet<Cancha> Canchas { get; set; }
+
     }
 
 }

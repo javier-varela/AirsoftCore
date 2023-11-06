@@ -1,0 +1,49 @@
+﻿@model Cancha
+
+@{
+    ViewData["Tittle"] = "Crear Categoria";
+}
+
+<section class="container">
+
+
+    <form method="POST" class="shadow mx-auto" style="max-width:1024px" asp-action="Create" enctype="multipart/form-data">
+        <div class="bg-primary text-white container p-4"> <h4>Crear Producto</h4></div>
+        <div class="container bg-white p-4 gap-3 flex-column d-flex">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+
+                <label class="form-label" asp-for="Nombre"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+
+            </div>
+            <div>
+
+                <label class="form-label" asp-for="Descripcion"></label>
+                <textarea asp-for="Descripcion" class="form-control"></textarea>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+
+            </div>
+            <div>
+
+                <label class="form-label" asp-for="PrecioHora"></label>
+                <input type="number" asp-for="PrecioHora" class="form-control" />
+                <span asp-validation-for="PrecioHora" class="text-danger"></span>
+
+            </div>
+
+            <div>
+                <label for="formFileMultiple" class="form-label">Selecciona las imagenes</label>
+                <input type="file" name="Imagenes" id="imagenesInput" multiple class="form-control">
+            </div>
+
+            <partial name="_VistaCrearVolver" />
+
+        </div>
+
+
+
+
+    </form>
+</section>

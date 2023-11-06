@@ -17,7 +17,14 @@ namespace AirsoftCore.Areas.Client.Controllers
 
         public IActionResult Index()
         {
-            return View(_contenedorTrabajo.Producto.GetAll(includeProperties: ",Imagenes,Categoria"));
+            return View(_contenedorTrabajo.Producto.GetAll(includeProperties: "Imagenes,Categoria"));
+        }
+
+        [HttpGet]
+        public IActionResult Canchas()
+        {
+
+            return View(_contenedorTrabajo.Cancha.GetAll(includeProperties: "Imagenes,FechasCierre"));
         }
 
         public IActionResult Privacy()
