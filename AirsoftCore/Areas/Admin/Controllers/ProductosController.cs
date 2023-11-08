@@ -67,7 +67,7 @@ namespace AirsoftCore.Areas.Admin.Controllers
                         }
 
                         // Agrega la URL de la imagen a la lista
-                        urlsImagenes.Add(new ImagenProducto() {Url = @"imagenes\productos\" + nombreImagen + extension });
+                        urlsImagenes.Add(new ImagenProducto() {Url = @"\imagenes\productos\" + nombreImagen + extension });
                     }
 
                     // Guarda las URL de las imágenes en la propiedad `URLS` del producto
@@ -75,7 +75,7 @@ namespace AirsoftCore.Areas.Admin.Controllers
 
                     _contenedorTrabajo.Producto.Add(model.Producto);
                     _contenedorTrabajo.Save();
-
+                    TempData["Succes"] = "Producto agregado correctamente";
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -130,8 +130,8 @@ namespace AirsoftCore.Areas.Admin.Controllers
                 return Json(new { succes = false, message = "Error borrando categoria" });
 
             }
-
-            if(objFromDb.Imagenes != null) {
+            _contenedorTrabajo.Producto.Remove(objFromDb);
+            if (objFromDb.Imagenes != null) {
                 var rutaDirectorioPrincipal = _webHostEnvironment.WebRootPath;
                 foreach (var imagen in objFromDb.Imagenes)
                 {
@@ -145,7 +145,7 @@ namespace AirsoftCore.Areas.Admin.Controllers
                 }
             }
 
-            _contenedorTrabajo.Producto.Remove(objFromDb);
+         
             _contenedorTrabajo.Save();
             return Json(new { succes = true, message = "Categoría borrada correctamente" });
         }

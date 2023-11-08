@@ -44,7 +44,6 @@
 
                     <td>
                         <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a class="btn btn-info text-white" asp-action="Details" asp-route-id="@item.Id">Details</a> |
                         <button type="button" class="btn btn-danger" onclick=Delete("@item.Id")>Delete</button>
                     </td>
                 </tr>
@@ -62,12 +61,12 @@
 
 </div>
 @section Scripts{
-    @if (TempData["SuccesAdd"] != null)
+    @if (TempData["Succes"] != null)
     {
         <script>
             Swal.fire({
                 title: '¡Éxito!',
-                text: '@TempData["SuccesAdd"]',
+                text: '@TempData["Succes"]',
                 icon: 'success',
                 confirmButtonText: 'Genial'
             })
@@ -100,10 +99,12 @@
                                 title: '!Eliminado!',
                                 text: response.message,
                                 confirmButtonText:
-                                    `<a href="/Admin/Productos"><i class="fa fa-thumbs-up"></i> Ok</a>`,
+                                    `<a class="text-decoration-none text-white" class="text-white" href="/Admin/Productos/"><i class="fa fa-thumbs-up"></i> Ok</a>`,
 
                             }
-                            )
+                            ).then(()=>location.reload())
+                                
+                            
 
                         } else {
                             // Si la respuesta no es exitosa, muestra un mensaje de error.

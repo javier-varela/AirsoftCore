@@ -38,5 +38,8 @@ namespace AirsoftCore.Areas.Admin.Controllers
             return View(model);
         }
 
+
+
+
     }
 }

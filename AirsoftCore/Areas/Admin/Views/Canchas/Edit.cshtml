@@ -1,14 +1,15 @@
 ﻿@model Cancha
 
 @{
-    ViewData["Tittle"] = "Crear Cancha";
+    ViewData["Tittle"] = "Crear Categoria";
 }
 
 <section class="container">
 
 
-    <form method="POST" class="shadow mx-auto" style="max-width:1024px" asp-action="Create" enctype="multipart/form-data">
-        <div class="bg-primary text-white container p-4"> <h4>Crear Cancha</h4></div>
+    <form method="POST" class="shadow mx-auto" style="max-width:1024px" asp-action="Edit" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <div class="bg-primary text-white container p-4"> <h4>Editar Cancha</h4></div>
         <div class="container bg-white p-4 gap-3 flex-column d-flex">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div>
@@ -38,7 +39,7 @@
                 <input type="file" name="Imagenes" id="imagenesInput" multiple class="form-control">
             </div>
 
-            <partial name="_VistaCrearVolver" />
+            <partial name="_VistaGuardarVolver" />
 
         </div>
 

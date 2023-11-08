@@ -7,10 +7,11 @@
 
 
         @foreach (var item in Model)
-        {
-            <li>
-                <div class="card" style="width: 18rem;">
-                    <img height="220" src="/@item.Imagenes[0].Url" class="block object-fit-cover card-img-top" alt="...">
+        { 
+            <li class="hover-efect">
+                 <a asp-action="Cancha" class="text-decoration-none" asp-route-id="@item.Id">
+                <div class="card" style="width: 18rem; cursor">
+                    <img height="220" src="@item.Imagenes[0].Url" class="block object-fit-cover card-img-top" alt="...">
                     <div class="card-body">
                         <div class="card-tittle">
                             <h5 class="">@item.Nombre</h5>
@@ -23,12 +24,14 @@
                     </div>
                     <div class="card-footer"> <a asp-area="Client" asp-controller="Reservas" asp-action="Create" asp-route-id="@item.Id" class="btn btn-primary mt-3">Reservar</a></div>
                 </div>
-
+                </a>
             </li>
 
 
         }
     </ul>
+
+
 </section>
 
 

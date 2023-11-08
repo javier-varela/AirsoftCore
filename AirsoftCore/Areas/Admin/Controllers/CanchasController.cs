@@ -61,7 +61,7 @@ namespace AirsoftCore.Areas.Admin.Controllers
                         }
 
                         // Agrega la URL de la imagen a la lista
-                        urlsImagenes.Add(new ImagenCancha() { Url = @"imagenes\canchas\" + nombreImagen + extension });
+                        urlsImagenes.Add(new ImagenCancha() { Url = @"\imagenes\canchas\" + nombreImagen + extension });
                     }
 
                     // Guarda las URL de las imágenes en la propiedad `URLS` del producto
@@ -70,6 +70,8 @@ namespace AirsoftCore.Areas.Admin.Controllers
                     _contenedorTrabajo.Cancha.Add(cancha);
                     _contenedorTrabajo.Save();
 
+                    TempData["Succes"] = "Cancha agregado correctamente";
+
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -77,5 +79,54 @@ namespace AirsoftCore.Areas.Admin.Controllers
 
             return View(cancha);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(_contenedorTrabajo.Cancha.Get(id));
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Cancha cancha)
+        {
+            _contenedorTrabajo.Cancha.Update(cancha);
+            _contenedorTrabajo.Save();
+           return RedirectToAction(nameof(Index));
+
+        }
+
+        #region llamadas a la API
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var objFromDb = _contenedorTrabajo.Cancha.GetFirstOrDefault((c) => c.Id == id, includeProperties: "Imagenes");
+            if (objFromDb == null)
+            {
+                return Json(new { succes = false, message = "Error borrando cancha" });
+
+            }
+            _contenedorTrabajo.Cancha.Remove(objFromDb);
+            if (objFromDb.Imagenes != null)
+            {
+                var rutaDirectorioPrincipal = _webHostEnvironment.WebRootPath;
+                foreach (var imagen in objFromDb.Imagenes)
+                {
+                    _contenedorTrabajo.ImagenCancha.Remove(imagen);
+                    var rutaImagen = Path.Combine(rutaDirectorioPrincipal, imagen.Url.TrimStart('\\'));
+                    if (System.IO.File.Exists(rutaImagen))
+                    {
+                        System.IO.File.Delete(rutaImagen);
+                    }
+
+                }
+            }
+
+          
+            _contenedorTrabajo.Save();
+            return Json(new { succes = true, message = "Cancha borrada correctamente" });
+        }
+        #endregion
     }
 }

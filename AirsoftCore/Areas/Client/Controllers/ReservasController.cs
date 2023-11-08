@@ -3,8 +3,10 @@ using AirsoftCore.Models;
 using AirsoftCore.Models.ViewModels;
 using AirsoftCore.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AirsoftCore.Areas.Client.Controllers
 {
@@ -32,7 +34,8 @@ namespace AirsoftCore.Areas.Client.Controllers
         public IActionResult Create(int id)
         {
 
-            var model = new CreateReservaViewModel() { 
+            var model = new CreateReservaViewModel()
+            {
                 Cancha = _contenedorTrabajo.Cancha.Get(id),
                 Reserva = new Reserva()
             };
@@ -42,20 +45,74 @@ namespace AirsoftCore.Areas.Client.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(CreateReservaViewModel model)
+        public async Task<IActionResult> Create(CreateReservaViewModel model)
         {
-            if (ModelState.IsValid)
+            var reserva = model.Reserva;
+            double precio = reserva.DuracionHoras * model.Cancha.PrecioHora;
+
+            string userId = _userManager.GetUserId(User);
+            var user = await _userManager.GetUserAsync(User);
+
+            IEnumerable<Reserva> reservas = _contenedorTrabajo.Reserva.GetAll(c => c.Id == model.Cancha.Id);
+            
+            if(!reservas.Any())
             {
-                model.Reserva.UsuarioId = _userManager.GetUserId(User);
-                model.Reserva.CanchaId = model.Cancha.Id;
-                model.Reserva.Precio = model.Reserva.DuracionHoras * model.Cancha.PrecioHora;
-                _contenedorTrabajo.Reserva.Add(model.Reserva);
-                _contenedorTrabajo.Save();
-                return View(nameof(Index));
+                foreach (var r in reservas)
+                {
+                    var horaInicio = r.FechaHora;
+                    var horaTermino = horaInicio.AddHours(r.DuracionHoras);
+
+                    if (reserva.FechaHora >= horaInicio && reserva.FechaHora <= horaTermino)
+                    {
+                        TempData["Error"] = "Ya existe una reservacion: De " + horaInicio.ToString() + " A " + horaTermino.ToString();
+
+                        return View(nameof(Index));
+                    }
+
+                    if (precio > user.Puntos)
+                    {
+                        TempData["Error"] = "No tienes suficientes Puntos, Tienes: " + user.Puntos.ToString();
+
+                        return View(nameof(Index));
+                    }
+                }
             }
-            
-            
-            return View(model);
+           
+
+            reserva.UsuarioId = userId;
+            reserva.CanchaId = model.Cancha.Id;
+            reserva.Precio = precio;
+
+
+            _contenedorTrabajo.Reserva.Add(model.Reserva);
+            _contenedorTrabajo.Save();
+            TempData["Succes"] = "Reserva Agregada";
+
+            return RedirectToAction("Index");
+
+
+
+            //return View(model);
         }
+
+        #region llamadas a la API
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var objFromDb = _contenedorTrabajo.Reserva.Get(id);
+            if (objFromDb == null)
+            {
+                return Json(new { succes = false, message = "Error borrando categoria" });
+
+            }
+            _contenedorTrabajo.Reserva.Remove(objFromDb);
+
+
+
+            _contenedorTrabajo.Save();
+            return Json(new { succes = true, message = "reserva borrada correctamente" });
+        }
+        #endregion
     }
 }

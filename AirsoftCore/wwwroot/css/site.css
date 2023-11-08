@@ -16,3 +16,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.hover-efect {
+    transition: all .2s;
+}
+
+.hover-efect:hover {
+    transform: scale(1.005,1.005);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}

@@ -11,7 +11,12 @@
 
         <input type="hidden" asp-for="Cancha.PrecioHora" />
         <input type="hidden" asp-for="Cancha.Id" />
-        <div class="bg-primary text-white container p-4"> <h4>Reservar Cancha: @Model.Cancha.Nombre</h4></div>
+        <div class="bg-primary text-white container p-4">
+            <h4>Reservar Cancha: @Model.Cancha.Nombre</h4>
+            <div>
+                Precio Hora = @Model.Cancha.PrecioHora
+            </div>
+        </div>
         <div class="container bg-white p-4 gap-3 flex-column d-flex">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div>

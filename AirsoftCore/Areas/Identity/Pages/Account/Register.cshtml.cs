@@ -130,6 +130,8 @@ namespace AirsoftCore.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                user.Puntos = 0;
+
                 //Con esto logramos guardar los campos personalizados
 
                 user.Nombre = Input.Nombre;

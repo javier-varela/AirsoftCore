@@ -1,5 +1,4 @@
-﻿
-@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<Usuario> SignInManager
 @inject UserManager<Usuario> UserManager
 
@@ -8,7 +7,7 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-
+      
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
         </li>
@@ -20,23 +19,29 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Productos" asp-action="Index">Productos</a>
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Canchas" asp-action="Index">Canchas</a>
                     </li>
                     <li class="dropdown-item">
                         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categorias" asp-action="Index">Categorias</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Productos" asp-action="Index">Productos</a>
+                    </li>
+
+                    <li class="dropdown-item">
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Compras" asp-action="Index">Compras</a>
+                    </li>
+                    <li class="dropdown-item">
+                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
                     </li>
 
                     <li class="dropdown-item">
                         <a class="nav-link text-dark" asp-area="Admin" asp-controller="Points" asp-action="Edit">Valor Puntos</a>
                     </li>
 
-                    <li class="dropdown-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                    </li>
 
-                    <li class="dropdown-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Compras" asp-action="Index">Compras</a>
-                    </li>
+
+
 
 
                 </ul>
@@ -62,6 +67,9 @@
         </li>
     }
 </ul>
+
+
+
 
 
 

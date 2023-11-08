@@ -24,5 +24,16 @@ namespace AirsoftCore.Models
         public int DuracionHoras { get; set; }
 
         public double Precio { get; set; }
+
+        public Reserva()
+        {
+            
+        }
+
+        public Reserva(string usuarioId, int canchaId)
+        {
+            UsuarioId = usuarioId;
+            CanchaId = canchaId;
+        }
     }
 }

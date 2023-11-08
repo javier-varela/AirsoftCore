@@ -56,6 +56,7 @@ namespace AirsoftCore.Data.Data.Inicializador
                 Email = "admin@admin.com",
                 EmailConfirmed = true,
                 Nombre = "admin",
+                Puntos = 0
 
             }, "Admin123#").GetAwaiter().GetResult();
 
@@ -71,6 +72,7 @@ namespace AirsoftCore.Data.Data.Inicializador
                 Email = "user@user.com",
                 EmailConfirmed = true,
                 Nombre = "user",
+                Puntos = 10000
 
             }, "User123#").GetAwaiter().GetResult();
 

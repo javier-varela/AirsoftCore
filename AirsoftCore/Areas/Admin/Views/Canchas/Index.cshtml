@@ -15,6 +15,7 @@
                 <th>@Html.DisplayNameFor(m => m.Id)</th>
                 <th>@Html.DisplayNameFor(m => m.Nombre)</th>
                 <th>Precio</th>
+                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -53,12 +54,23 @@
 
 </div>
 @section Scripts{
-    @if (TempData["SuccesAdd"] != null)
+    @if (TempData["Succes"] != null)
     {
         <script>
             Swal.fire({
                 title: '¡Éxito!',
-                text: '@TempData["SuccesAdd"]',
+                text: '@TempData["Succes"]',
+                icon: 'success',
+                confirmButtonText: 'Genial'
+            })
+        </script>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <script>
+            Swal.fire({
+                title: '¡Éxito!',
+                text: '@TempData["Succes"]',
                 icon: 'success',
                 confirmButtonText: 'Genial'
             })
@@ -70,7 +82,7 @@
 
         function Delete(id) {
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Estas Seguro?',
                 text: "!ELIMINAR!",
                 icon: 'warning',
                 showCancelButton: true,
@@ -80,7 +92,7 @@
             }).then(async (result) => {
 
                 if (result.isConfirmed) {
-                    fetch(`/Admin/Cancha/Delete/${id}`, {
+                    fetch(`/Admin/Canchas/Delete/${id}`, {
                         method: "DELETE",
                     }).then(response => response.json()).then(response => {
                         // Comprueba la respuesta del servidor.
@@ -91,10 +103,10 @@
                                 title: '!Eliminado!',
                                 text: response.message,
                                 confirmButtonText:
-                                    `<a class="text-white" href="/Admin/Productos"><i class="fa fa-thumbs-up"></i> OK!</a>`,
+                                    `<a class="text-white"><i class="fa fa-thumbs-up"></i> OK!</a>`,
 
                             }
-                            )
+                            ).then(()=>location.reload())
 
                         } else {
                             // Si la respuesta no es exitosa, muestra un mensaje de error.

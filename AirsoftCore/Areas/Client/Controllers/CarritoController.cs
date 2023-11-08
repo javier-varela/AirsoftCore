@@ -28,7 +28,7 @@ namespace AirsoftCore.Areas.Client.Controllers
         {
             string userId = _userManager.GetUserId(User);
             var productosCarrito = _contenedorTrabajo.ProductoCarrito.GetAll((p) => p.UsuarioId == userId, includeProperties: "Producto");
-
+            var user = _contenedorTrabajo.Usuario.GetFirstOrDefault(u => u.Id == userId);
             double total = 0;
             var _ProductosCarritoVM = new List<ProductoCarritoViewModel>();
 
@@ -49,7 +49,7 @@ namespace AirsoftCore.Areas.Client.Controllers
             {
                 ProductosCarritoVM = _ProductosCarritoVM as IEnumerable<ProductoCarritoViewModel>,
                 Total = total,
-                PuntosUsuario = _contenedorTrabajo.Usuario.GetFirstOrDefault(u => u.Id == userId).Puntos
+                PuntosUsuario =user.Puntos
             };
 
             return View(model);
@@ -204,6 +204,7 @@ namespace AirsoftCore.Areas.Client.Controllers
             _contenedorTrabajo.Save();
             return Json(new { succes = true, message = "Articulo borrado del carrito correctamente" });
         }
+
         #endregion
 
 
